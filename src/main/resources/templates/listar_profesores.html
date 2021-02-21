@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Lista de Profesores</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    </head>
+    <body>
+        <h1>Lista de Profesores</h1>
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">nombre</th>
+          <th scope="col">talleres</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+  
+  <tbody>
+               
+        <div th:each="profesor:${profesores}">
+            <tr>
+                <th scope="row" th:text="${profesor.idProfesor}"></th>
+              <td th:text="${profesor.nombre}"></td>
+              <td>
+                  <!-- <a th:href="@{taller_edit/}+${profesor.talleridTaller.idTaller}"> <p th:text="${profesor.talleridTaller.nombre}"/> </a> -->
+                  
+                      <p th:text="${profesor.getTallerNombre()}"/>
+                  
+              </td>
+              <td><a class="btn btn-success" th:href="@{profesor_edit/}+${profesor.idProfesor}" role="button">Modificar profesor</a></td>
+              <td><a class="btn btn-danger" th:href="@{borrar_profesor/}+${profesor.idProfesor}" role="button">Eliminar profesor</a></td>
+              
+            </tr>
+        </div>
+  
+  </tbody>
+  
+</table>
+        <div>
+            <a href="/crear_profesor" class="btn btn-primary" role="button">Crear Profesor</a>
+            <a href="/crear_taller" class="btn btn-primary" role="button">Crear Taller</a>
+            <a href="/" class="btn btn-secondary" role="button">Alumnos</a>
+            <a href="/listar_talleres" class="btn btn-secondary" role="button">Talleres</a>
+        </div> 
+    </body>
+</html>

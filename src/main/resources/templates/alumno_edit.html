@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Editar Alumno</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    </head>
+     
+    <body>
+        <div class="container">
+            <h1>Editar Alumno</h1>
+            <form th:action="@{/act_alumno}" method="post" th:object="${alumno}">
+                <div class="form-group">
+                    <label for="InputId">Id</label>
+                    <input type="number" class="form-control" id="InputId" th:field="*{idAlumno}" readonly="true">
+                  
+                    <label for="InputNombre">Nombre</label>
+                    <input type="text" class="form-control" id="InputNombre" placeholder="Introduzca nombre de usuario" th:field="*{nombre}">
+                  
+                    <div class="row mt-3">
+                        <div class="col-3">
+                            <label for="InputTaller">Taller</label>
+                        </div>
+                        <div class="col-3">
+                            <div class="row align-items-end">
+                              <select multiple="multiple" id="InputTaller" name="selectTaller">
+                                  <option th:each="taller:${talleres}" th:text="${taller.nombre}" th:value="${taller.idTaller}" >
+                                  </option>
+                              </select>
+                            </div>
+                        </div> 
+                    </div>
+                  <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
