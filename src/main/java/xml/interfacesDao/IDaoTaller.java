@@ -6,16 +6,17 @@
 package xml.interfacesDao;
 
 import com.semanacultural.webservice.entidades.Profesor;
+import com.semanacultural.webservice.entidades.Taller;
 import java.util.ArrayList;
 
 /**
  *
  * @author enrique
  */
-public interface IDaoProfesor {
+public interface IDaoTaller {
     
     public void guardarProfesor(Profesor p);
-    public ArrayList<Profesor> verProfesores();
+    public ArrayList<Taller> verTalleres();
     
     
 }

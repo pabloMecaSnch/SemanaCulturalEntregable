@@ -7,7 +7,9 @@ package com.semanacultural.webservice.repositories;
 
 import com.semanacultural.webservice.entidades.Taller;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +22,6 @@ public interface TallerRepository extends JpaRepository<Taller, Integer> {
      @Query("select t from Taller t" )
     public List<Taller> verUsuarios();
     
-    @Query("select t from Taller t where t.idTaller=?1" )
-    public List<Taller> verUsuario(Integer id);
+    @Query("select t from Taller t where t.nombre=?1" )
+    public List<Taller> verTallerNombre(String nombre);
 }

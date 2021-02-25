@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import xml.DaoImplements.DaoTallerXML;
+import xml.handler.TallerHandlerXML;
 /**
  *
  * @author Pablo
@@ -164,8 +165,14 @@ public class ControladorWeb {
     }
      @RequestMapping("/borrar_taller/{id}")
     public String borrarTaller(@PathVariable(value="id") Integer idTaller){
-        Taller taller= new Taller(idTaller);
-        service.borrarTaller(taller);
+        Taller taller= service.getOneTaller(idTaller);
+        if(taller.getAlumnoList().isEmpty()){
+            List<Profesor> profesoresTaller = taller.getProfesorList();
+            profesoresTaller.forEach(profesor->{
+               service.actualizarProfesor(profesor);
+            });
+            service.borrarTaller(taller);
+        }
         return"redirect:/listar_talleres";
     }
     @RequestMapping("/taller_edit/{id}")
@@ -179,5 +186,43 @@ public class ControladorWeb {
     public String actTaller(Taller taller){
         service.guardarTaller(taller);
         return"redirect:/";
+    }
+    
+    //leer XMLO
+    @RequestMapping("/leer_fichero")
+    public String leerFichero(){
+        //modificar la ruta del archivo
+        DaoTallerXML dp= new DaoTallerXML("C:\\Users\\usuario\\Documents\\GitHub\\SemanaCulturalEntregable\\src\\main\\java\\xml\\archivo\\profesoresJulioVerne.xml");
+        ArrayList<Taller> talleres=dp.verTalleres();
+        talleres.forEach((taller)->{
+            service.guardarTaller(taller);
+            taller.getProfesorList().forEach(profesor->{
+              service.guardarProfesor(profesor);
+            });
+        });
+        return "redirect:/listar_talleres";
+    }
+    @RequestMapping("/borrar_fichero")
+    public String borrarFichero(){
+        DaoTallerXML dp= new DaoTallerXML("C:\\Users\\usuario\\Documents\\GitHub\\SemanaCulturalEntregable\\src\\main\\java\\xml\\archivo\\profesoresJulioVerne.xml");
+        ArrayList<Taller> talleres=dp.verTalleres();
+        ArrayList<Taller> talleres2=new ArrayList<>();
+        
+        talleres.forEach(taller->{
+            List<Taller> f = service.verTallerNombre(taller);
+            talleres2.addAll(service.verTallerNombre(taller));
+        });
+        talleres2.forEach(taller->{
+            
+            if(taller.getAlumnoList().isEmpty()){
+                List<Profesor> profesoresTaller = taller.getProfesorList();
+                profesoresTaller.forEach(profesor->{
+                   service.actualizarProfesor(profesor);
+                });
+                service.borrarTaller(taller);
+            }
+        });
+        
+        return "redirect:/listar_talleres";
     }
 }

@@ -44,12 +44,23 @@ public class Taller implements Serializable {
     private Integer idTaller;
     @Column(name = "nombre")
     private String nombre;
+    @Column(name="horas")
+    private Integer horas;
+
+    public Integer getHoras() {
+        return horas;
+    }
+
+    public void setHoras(Integer horas) {
+        this.horas = horas;
+    }
     @ManyToMany(mappedBy = "tallerList")
     private List<Alumno> alumnoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "talleridTaller")
     private List<Profesor> profesorList;
 
     public Taller() {
+        this.alumnoList=new ArrayList<>();
     }
 
     public Taller(Integer idTaller) {
@@ -74,6 +85,8 @@ public class Taller implements Serializable {
 
     @XmlTransient
     public List<Alumno> getAlumnoList() {
+        if(this.alumnoList==null)
+            this.alumnoList = new ArrayList<>();
         return alumnoList;
     }
 
@@ -90,12 +103,21 @@ public class Taller implements Serializable {
         this.profesorList = profesorList;
     }
 
+    public void addProfesor(Profesor profesor){
+        if(this.profesorList==null){
+            this.profesorList = new ArrayList<Profesor>();
+        }
+        this.profesorList.add(profesor);
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (idTaller != null ? idTaller.hashCode() : 0);
         return hash;
     }
+    
+    
 
     @Override
     public boolean equals(Object object) {

@@ -6,18 +6,19 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Lista de Alumnos</title>
+        <title>Lista de Talleres</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     </head>
     <body>
-        <h1>Lista de Alumnos</h1>
+        <h1>Lista de Talleres</h1>
   <table class="table">
       <thead>
         <tr>
           <th scope="col">id</th>
           <th scope="col">nombre</th>
+          <th scope="col">horas</th>
           <th scope="col">alumnos</th>
           <th scope="col">profesores</th>
           <th scope="col"></th>
@@ -31,6 +32,7 @@ and open the template in the editor.
             <tr>
                 <th scope="row" th:text="${taller.idTaller}"></th>
               <td th:text="${taller.nombre}"></td>
+              <td th:text="${taller.horas}"></td>
               <td>
                  <div th:each="alumno:${taller.alumnoList}">
                      <a th:href="@{alumno_edit/}+${alumno.idAlumno}"> <p th:text="${alumno.nombre}"/> </a>

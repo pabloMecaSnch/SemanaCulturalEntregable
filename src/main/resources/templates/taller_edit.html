@@ -15,26 +15,39 @@ and open the template in the editor.
         <div class="container">
             <form th:action="@{/act_taller}" method="post" th:object="${taller}">
                 <div class="row">
-
                     <div class="col">
-                        <h3>id</h3>
+                        <div class="row">
+                            <h3>id</h3>
+                        </div>
+                        <div class="row">
+                            <input type="number" th:field="*{idTaller}"/>
+                        </div>
                     </div>
                      <div class="col">
-                        <h3>nombre</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <input type="number" th:field="*{idTaller}"/>
-                    </div>
-                     <div class="col">
-                        <input type="text" th:field="*{nombre}"/>
-                    </div>
-                     <div class="col">
-                        <a th:href="@{borrar_taller/}+${taller.idTaller}" class="btn btn-danger" role="button">Eliminar</a>
+                        <div class="row">
+                            <h3>nombre</h3>
+                        </div>
+                        <div class="row">
+                            <input type="text" th:field="*{nombre}"/>
+                        </div>
                     </div>
                     <div class="col">
-                       <button type="submit" class="btn btn-warning">Modificar</button>
+                        <div class="row">
+                            <h3>horas</h3>
+                        </div>
+                        <div class="row">
+                            <input type="number" th:field="*{horas}"/>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <a th:href="@{borrar_taller/}+${taller.idTaller}" class="btn btn-danger" role="button">Eliminar</a>
+                            </div>
+                            <div class="col">
+                               <button type="submit" class="btn btn-warning">Modificar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>

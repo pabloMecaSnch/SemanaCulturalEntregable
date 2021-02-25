@@ -6,26 +6,27 @@
 package xml.DaoImplements;
 
 import com.semanacultural.webservice.entidades.Profesor;
-import xml.handler.ProfesorHandlerXML;
+import com.semanacultural.webservice.entidades.Taller;
+import xml.handler.TallerHandlerXML;
 import java.util.ArrayList;
-import xml.interfacesDao.IDaoProfesor;
+import xml.interfacesDao.IDaoTaller;
 
 /**
  *
  * @author enrique
  */
-public class DaoProfesorXML extends DaoXML implements IDaoProfesor {
+public class DaoTallerXML extends DaoXML implements IDaoTaller {
     
 
     private String nombreFichero;
-    private  ProfesorHandlerXML handler;
+    private  TallerHandlerXML handler;
   
     
-    public DaoProfesorXML(String nombreFichero){
+    public DaoTallerXML(String nombreFichero){
        
         
-        super(new ProfesorHandlerXML());
-        handler=(ProfesorHandlerXML)this.getHandler();
+        super(new TallerHandlerXML());
+        handler=(TallerHandlerXML)this.getHandler();
         this.nombreFichero=nombreFichero;
 
     }
@@ -35,11 +36,10 @@ public class DaoProfesorXML extends DaoXML implements IDaoProfesor {
        
     }
 
-    public ArrayList<Profesor> verProfesores(){
-      
+    public ArrayList<Taller> verTalleres(){
         try {
             this.leerXML(nombreFichero);
-            return handler.getProfesores();
+            return handler.getTalleres();
         } catch (Exception ex) {
            return null;
         }

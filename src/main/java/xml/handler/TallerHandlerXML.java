@@ -6,31 +6,36 @@
 package xml.handler;
 
 import com.semanacultural.webservice.entidades.Profesor;
+import com.semanacultural.webservice.entidades.Taller;
 import java.util.ArrayList;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import xml.DaoImplements.DaoTallerXML;
 
 /**
  *
  * @author enrique
  */
-public class ProfesorHandlerXML extends DefaultHandler{
+public class TallerHandlerXML extends DefaultHandler{
     
     private StringBuilder cadena;
     
     
-    private Profesor profesor;
-    private ArrayList<Profesor> profesores;
+    private Taller taller;
+    private ArrayList<Taller> talleres;
    
+    
   
   //Parte que recoge los objetos creados para ser enviados fuera de la clase
     
-    public ArrayList<Profesor> getProfesores() {
-        return profesores;
+    public ArrayList<Taller> getTalleres() {
+  
+        return talleres;
     }
+    
     
     
     
@@ -41,7 +46,7 @@ public class ProfesorHandlerXML extends DefaultHandler{
     @Override
     public void startDocument() throws SAXException {
         cadena=new StringBuilder();
-        profesores=new ArrayList<Profesor>();
+        talleres=new ArrayList<Taller>();
         System.out.println("startDocument");
           
     }
@@ -49,9 +54,11 @@ public class ProfesorHandlerXML extends DefaultHandler{
     @Override
     public void startElement(String uri, String nombreLocal, String nombreCualif, Attributes atrbts) throws SAXException {
         cadena.setLength(0);
-        if (nombreCualif.equals("profesor")){
-            profesor=new Profesor();
-            //profesor.setCp(atrbts.getValue("cp"));
+        if (nombreCualif.equals("taller")){
+            taller=new Taller();
+            taller.setNombre(atrbts.getValue("nombre"));
+            taller.setHoras(Integer.parseInt(atrbts.getValue("horas")));
+            talleres.add(taller);
         }
        
          System.out.println("startElement: "+nombreLocal+ " "+nombreCualif);
@@ -68,15 +75,12 @@ public class ProfesorHandlerXML extends DefaultHandler{
     
     @Override
     public void endElement(String uri, String nombreLocal, String nombreCualif) throws SAXException {
-       /* if(nombreCualif.equals("nombre")){
+        if(nombreCualif.equals("Profesor")){
+            Profesor profesor = new Profesor();
+            profesor.setTalleridTaller(taller);
             profesor.setNombre(cadena.toString());
-        } else if (nombreCualif.equals("horasLectivas")){
-            profesor.setHorasLectivas(Integer.parseInt(cadena.toString()));
-        } else if (nombreCualif.equals("mayor55")){
-            profesor.setMayor55(Boolean.parseBoolean(cadena.toString()));
-        }else if (nombreCualif.equals("profesor")){
-            profesores.add(profesor);
-        }*/
+            taller.addProfesor(profesor);
+        }
         System.out.println("endtElement: "+nombreLocal+ " "+nombreCualif);
     }
     

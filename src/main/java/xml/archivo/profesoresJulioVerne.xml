@@ -6,20 +6,11 @@ and open the template in the editor.
 -->
 
 
-<profesores>
-    <profesor>
-        <nombre>Pepe</nombre>
-        <horasLectivas>18</horasLectivas>
-        <mayor55>false</mayor55>
-    </profesor>
-    <profesor dni="1234" movil="890" cp="41008">
-        <nombre>Juana</nombre>
-        <horasLectivas>18</horasLectivas>
-        <mayor55>false</mayor55>
-    </profesor>
-    <profesor>
-        <nombre>Rosa</nombre>
-        <horasLectivas>18</horasLectivas>
-        <mayor55>true</mayor55>
-    </profesor>
- </profesores>
+<talleres>
+    <taller nombre ="robotica" horas="2">
+        <Profesor>
+            Santiago
+        </Profesor>
+    </taller>
+
+</talleres>

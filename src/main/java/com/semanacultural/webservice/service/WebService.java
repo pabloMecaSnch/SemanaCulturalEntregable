@@ -64,6 +64,9 @@ public class WebService {
     public Profesor getOneProfesor(Integer id){
         return profReposirtory.getOne(id);
     }
+    public void actualizarProfesor(Profesor profesor){
+        profReposirtory.updateProfesor(profesor.getIdProfesor(),profesor.getNombre());
+    }
     
     //--------CRUD Taller
     public void guardarTaller(Taller taller){
@@ -71,6 +74,9 @@ public class WebService {
     }
     public void borrarTaller(Taller taller){
         tallerReposirtory.delete(taller);
+    }
+    public List<Taller> verTallerNombre(Taller taller){
+        return tallerReposirtory.verTallerNombre(taller.getNombre());
     }
     public List<Taller> getTalleres(){
         List<Taller> taller = tallerReposirtory.findAll();
